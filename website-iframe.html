@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-.responsive-iframe-container {
-  position: relative;
-  overflow: hidden;
-  padding-top: 56.25%;
-}
-
-.responsive-iframe-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-</style>
-<script>
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
-
-  function loadContent() {
-    const contentURL = getQueryParam('content');
-    if (contentURL) {
-      document.getElementById('content-iframe').src = contentURL;
-    } else {
-      document.body.innerHTML = 'Error: No content URL provided.';
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .responsive-iframe-container {
+      position: relative;
+      overflow: hidden;
+      padding-top: 75%; /* Increase the padding value for a larger iframe */
     }
-  }
-</script>
+
+    .responsive-iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
 </head>
-<body onload="loadContent()">
-<div class="responsive-iframe-container">
-  <iframe id="content-iframe" allow="autoplay"></iframe>
-</div>
+<body>
+  <div class="responsive-iframe-container">
+    <iframe id="content-iframe" allowfullscreen></iframe> <!-- Added allowfullscreen attribute -->
+  </div>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function loadContent() {
+      const contentURL = getQueryParam('content');
+      if (contentURL) {
+        document.getElementById('content-iframe').src = contentURL;
+      } else {
+        document.body.innerHTML = 'Error: No content URL provided.';
+      }
+    }
+    window.onload = loadContent; // Changed to window.onload instead of body.onload
+  </script>
 </body>
 </html>
