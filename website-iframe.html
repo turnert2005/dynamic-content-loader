@@ -22,7 +22,7 @@
 </head>
 <body>
   <div class="responsive-iframe-container">
-    <iframe id="content-iframe" allowfullscreen></iframe> <!-- Added allowfullscreen attribute -->
+    <iframe id="content-iframe" allowfullscreen></iframe>
   </div>
   <script>
     function getQueryParam(param) {
@@ -33,12 +33,16 @@
     function loadContent() {
       const contentURL = getQueryParam('content');
       if (contentURL) {
-        document.getElementById('content-iframe').src = contentURL;
+        if (contentURL.endsWith('.pdf')) {
+          document.getElementById('content-iframe').src = 'https://drive.google.com/viewerng/viewer?embedded=true&url=' + contentURL;
+        } else {
+          document.getElementById('content-iframe').src = 'https://turnert2005.github.io/dynamic-content-loader/website-iframe.html?content=' + contentURL;
+        }
       } else {
         document.body.innerHTML = 'Error: No content URL provided.';
       }
     }
-    window.onload = loadContent; // Changed to window.onload instead of body.onload
+    window.onload = loadContent;
   </script>
 </body>
 </html>
