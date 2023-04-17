@@ -7,7 +7,7 @@
 .responsive-iframe-container {
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%; /* Set this value for the desired aspect ratio */
+  padding-top: 56.25%;
 }
 
 .responsive-iframe-container iframe {
@@ -19,10 +19,25 @@
   border: 0;
 }
 </style>
+<script>
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function loadContent() {
+    const contentURL = getQueryParam('content');
+    if (contentURL) {
+      document.getElementById('content-iframe').src = contentURL;
+    } else {
+      document.body.innerHTML = 'Error: No content URL provided.';
+    }
+  }
+</script>
 </head>
-<body>
+<body onload="loadContent()">
 <div class="responsive-iframe-container">
-  <iframe src="https://example.com/path/to/your/website" allow="autoplay"></iframe>
+  <iframe id="content-iframe" allow="autoplay"></iframe>
 </div>
 </body>
 </html>
